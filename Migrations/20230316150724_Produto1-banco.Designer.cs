@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JPConsultoria.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20230303133030_Produto-banco")]
-    partial class Produtobanco
+    [Migration("20230316150724_Produto1-banco")]
+    partial class Produto1banco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,6 +81,49 @@ namespace JPConsultoria.Migrations
                     b.ToTable("Fornecedor");
                 });
 
+            modelBuilder.Entity("JPConsultoria.Models.Funcionario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Cargo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Cargo");
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Cpf");
+
+                    b.Property<string>("Departamento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Departamento");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Email");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Nome");
+
+                    b.Property<decimal>("salario")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Salário");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Funcionario");
+                });
+
             modelBuilder.Entity("JPConsultoria.Models.Produto", b =>
                 {
                     b.Property<int>("Id")
@@ -100,43 +143,13 @@ namespace JPConsultoria.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Nome");
 
-                    b.Property<float>("Valor")
-                        .HasColumnType("real")
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)")
                         .HasColumnName("Valor");
 
                     b.HasKey("Id");
 
                     b.ToTable("Produto");
-                });
-
-            modelBuilder.Entity("JPConsultoria.Models.Funcionario", b =>
-                {
-                    b.HasBaseType("JPConsultoria.Models.Cliente");
-
-                    b.Property<string>("Cargo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Cargo");
-
-                    b.Property<string>("Departamento")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Departamento");
-
-                    b.Property<float>("salario")
-                        .HasColumnType("real")
-                        .HasColumnName("Salário");
-
-                    b.ToTable("Funcionario");
-                });
-
-            modelBuilder.Entity("JPConsultoria.Models.Funcionario", b =>
-                {
-                    b.HasOne("JPConsultoria.Models.Cliente", null)
-                        .WithOne()
-                        .HasForeignKey("JPConsultoria.Models.Funcionario", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

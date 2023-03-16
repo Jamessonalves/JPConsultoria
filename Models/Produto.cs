@@ -21,7 +21,7 @@ namespace JPConsultoria.Models
 
         [Column("Valor")]
         [Display(Name = "Valor")]
-        public float Valor { get; set; }
+        public decimal Valor { get; set; }
         
         
     }
